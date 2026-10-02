@@ -71,7 +71,9 @@ export const claudeClassifier: Classifier = async (prompt, image) => {
     output_config: { effort: "low", format: zodOutputFormat(VerdictSchema) },
     system:
       "You check photos for a college scavenger hunt. Judge only what is visible. " +
-      "Be reasonably lenient about framing, lighting and selfie angles; answer no only when the photo clearly does not match.",
+      "Be reasonably lenient about framing, lighting and selfie angles; answer no only when the photo clearly does not match. " +
+      "People may try to cheat: answer no if the image looks AI-generated, digitally edited or composited, a screenshot, " +
+      "or a photo of another screen or printout, even if it otherwise matches.",
     messages: [
       {
         role: "user",

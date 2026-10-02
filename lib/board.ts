@@ -368,13 +368,22 @@ export interface Review {
   share_claimed?: boolean;
 }
 
-export async function createReview(stage: StageId, image: string, note: string, store: Store = getStore()): Promise<Review> {
+export async function createReview(
+  stage: StageId,
+  image: string,
+  note: string,
+  store: Store = getStore(),
+  /** "approved"/"rejected" = the AI already decided; logged so execs can still see the photo. */
+  status: Review["status"] = "pending",
+): Promise<Review> {
+  const now = new Date().toISOString();
   const review: Review = {
     id: crypto.randomUUID(),
     stage,
     image,
-    status: "pending",
-    created_at: new Date().toISOString(),
+    status,
+    created_at: now,
+    ...(status === "pending" ? {} : { decided_at: now }),
     note,
   };
   await store.set(reviewKey(review.id), review);

@@ -274,3 +274,12 @@ Fix:
 - Code comments in `lib/`, `pages/`, `scripts/`, `tests/` use plain hyphens now.
 - New test fails if an em dash reappears in clues.json or the UI files. 93/93 tests · typecheck · check-content clean.
 - Not touched: the internal markdown (answer key, CHANGES.md, SETUP.md, README), which pledges never see.
+
+---
+
+## Iteration 16 - exec photo log + anti-cheat (2026-10-01)
+
+- Every Cathedral photo is now stored, not just the ones sent to manual review. AI-approved and AI-rejected photos are saved as already-decided reviews with the AI's note. An AI approval also pings the webhook ("check it on /exec").
+- `/exec` has a new **Photo log** (newest first): verdict, time, AI note, "Show photo" (fetched on demand from the new passcode-only `GET /api/exec/photo?id=`, so the 4s polling stays light) and **Revoke (looks fake)** on approved photos. Revoke un-solves 7b, which re-locks the final stage because convergence needs both threads.
+- The Claude check's system prompt now says to answer no if the image looks AI-generated, edited or composited, a screenshot, or a photo of a screen or printout.
+- New API test covers the log, the on-demand photo fetch, the 404 without passcode, and revoke. 94/94 tests · typecheck clean.

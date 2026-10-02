@@ -6,6 +6,7 @@ import advisorHandler from "@/pages/api/advisor-request";
 import completeHandler from "@/pages/api/complete";
 import execStateHandler from "@/pages/api/exec/state";
 import execActionHandler from "@/pages/api/exec/action";
+import execPhotoHandler from "@/pages/api/exec/photo";
 import { setClassifierOverride } from "@/lib/verify-image";
 import { call, EXEC, freshEnv, TINY_PNG } from "./helpers";
 
@@ -82,6 +83,28 @@ describe("POST /api/verify", () => {
       await verify("7a_wqed", "LAUNCH");
       setClassifierOverride(async () => "no");
       expect((await verify("7b_cathedral", TINY_PNG)).body).toEqual({ success: false });
+    });
+
+    it("AI-decided photos land in the exec photo log, viewable and revocable", async () => {
+      await verify("7a_wqed", "LAUNCH");
+      setClassifierOverride(async () => "no");
+      await verify("7b_cathedral", TINY_PNG);
+      setClassifierOverride(async () => "yes");
+      await verify("7b_cathedral", TINY_PNG);
+
+      const ex = await call(execStateHandler, { headers: EXEC });
+      const log = ex.body.reviews as { id: string; status: string; image: string; note: string }[];
+      expect(log.map((r) => r.status)).toEqual(["approved", "rejected"]); // newest first
+      expect(log[0].note).toContain("said yes");
+      expect(log[0].image).toBe(""); // polled state stays light
+
+      const photo = await call(execPhotoHandler, { headers: EXEC, query: { id: log[0].id } });
+      expect(photo.body.image).toBe(TINY_PNG);
+      expect((await call(execPhotoHandler, { query: { id: log[0].id } })).statusCode).toBe(404);
+
+      // revoke = un-solve 7b, which re-locks the final stage
+      await action({ action: "set_stage", stage: "7b_cathedral", solved: false });
+      expect((await call(stateHandler)).body.global[1].solved).toBe(false);
     });
 
     it("classifier error → queued for exec review, exec approves, device claims share", async () => {

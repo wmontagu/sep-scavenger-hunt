@@ -118,6 +118,7 @@ export default function Exec() {
   // mirrors outdoorOpen() in lib/board.ts (not imported: that module is server-only)
   const indoorDone = (["1_cap_table", "2_term_sheet", "3_pitch_deck"] as const).every((id) => board.stages[id].solved);
   const pending = data.reviews.filter((r) => r.status === "pending");
+  const decided = data.reviews.filter((r) => r.status !== "pending");
 
   return (
     <main className="wrap">
@@ -221,6 +222,23 @@ export default function Exec() {
         </section>
       ))}
 
+      <div className="section-label">Photo log ({decided.length})</div>
+      <p className="muted small">
+        Every photo after a decision, newest first, including ones the AI approved on its own. If an approved one is
+        fake, revoke it: that un-solves the Cathedral, so the final stage locks again until a real photo goes through.
+      </p>
+      {decided.length === 0 && <p className="muted small">No photos yet.</p>}
+      {decided.map((r) => (
+        <PhotoLogItem
+          key={r.id}
+          review={r}
+          pass={pass}
+          busy={busy}
+          canRevoke={r.status === "approved" && board.stages[r.stage].solved}
+          onRevoke={() => act({ action: "set_stage", stage: r.stage, solved: false })}
+        />
+      ))}
+
       <div className="section-label">Advisor pings</div>
       {data.advisor.length === 0 && <p className="muted small">None yet.</p>}
       {data.advisor.map((p, i) => (
@@ -274,5 +292,63 @@ export default function Exec() {
         </form>
       </section>
     </main>
+  );
+}
+
+function PhotoLogItem({
+  review,
+  pass,
+  busy,
+  canRevoke,
+  onRevoke,
+}: {
+  review: Review;
+  pass: string;
+  busy: boolean;
+  canRevoke: boolean;
+  onRevoke: () => void;
+}) {
+  // Images aren't in the polled state (too heavy); fetch one when asked.
+  const [image, setImage] = useState<string | null>(null);
+  const [loading, setLoading] = useState(false);
+
+  async function show() {
+    setLoading(true);
+    try {
+      const res = await fetch(`/api/exec/photo?id=${encodeURIComponent(review.id)}`, {
+        headers: { "x-exec-passcode": pass },
+        cache: "no-store",
+      });
+      if (res.ok) setImage(((await res.json()) as { image: string }).image);
+    } finally {
+      setLoading(false);
+    }
+  }
+
+  return (
+    <section className="card review">
+      <div className="row">
+        <strong>
+          {review.stage} · {review.status === "approved" ? "✓ approved" : "✗ rejected"}
+        </strong>
+        <span className="muted small">{ago(review.decided_at ?? review.created_at)}</span>
+      </div>
+      {review.note && <div className="muted small">{review.note}</div>}
+      {image ? (
+        // eslint-disable-next-line @next/next/no-img-element
+        <img src={image} alt="submitted photo" />
+      ) : (
+        <button className="ghost" disabled={loading} onClick={show}>
+          {loading ? "Loading…" : "Show photo"}
+        </button>
+      )}
+      {canRevoke && (
+        <div className="row">
+          <button className="danger" disabled={busy} onClick={onRevoke}>
+            Revoke (looks fake)
+          </button>
+        </div>
+      )}
+    </section>
   );
 }

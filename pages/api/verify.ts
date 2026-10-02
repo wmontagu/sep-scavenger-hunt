@@ -36,8 +36,16 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse<
     if (board.stages[stage].solved) return res.status(200).json({ success: true, already_solved: true });
 
     const result = await verifyImage(stage, image);
-    if (result.outcome === "approved") return res.status(200).json(await markSolved(stage));
-    if (result.outcome === "rejected") return res.status(200).json({ success: false });
+    const aiNote = `AI (${result.provider})${result.detail ? `: ${result.detail}` : ""}`;
+    if (result.outcome === "approved") {
+      await createReview(stage, submission as string, `${aiNote} said yes`, undefined, "approved");
+      void notifyExecs(`📸 AI approved a photo for ${stage}. Check it on /exec (photo log).`);
+      return res.status(200).json(await markSolved(stage));
+    }
+    if (result.outcome === "rejected") {
+      await createReview(stage, submission as string, `${aiNote} said no`, undefined, "rejected");
+      return res.status(200).json({ success: false });
+    }
 
     const review = await createReview(stage, submission as string, `${result.provider}${result.detail ? `: ${result.detail}` : ""}`);
     void notifyExecs(`📸 Photo for ${stage} needs manual approval on /exec (${result.provider}${result.detail ? `: ${result.detail}` : ""})`);
