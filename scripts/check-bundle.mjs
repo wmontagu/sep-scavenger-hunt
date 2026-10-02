@@ -1,5 +1,5 @@
 /**
- * npm run check-bundle (after `npm run build`) — anti-cheat: make sure no answer,
+ * npm run check-bundle (after `npm run build`) - anti-cheat: make sure no answer,
  * share, image prompt, or not-yet-unlocked clue text is in anything the browser
  * can download (.next/static JS/CSS and prerendered HTML).
  */
@@ -41,7 +41,7 @@ function* walk2(dir) {
 
 const targets = [...walk(path.join(root, ".next/static")), ...[...walk(path.join(root, ".next/server/pages"))].filter((p) => p.endsWith(".html"))];
 if (!targets.length) {
-  console.error("No build output found — run `npm run build` first.");
+  console.error("No build output found - run `npm run build` first.");
   process.exit(2);
 }
 let leaks = 0;

@@ -12,7 +12,7 @@ export const config = { api: { bodyParser: { sizeLimit: "8mb" } } };
  * POST /api/verify  { stage, submission }
  *   text stages:  submission = the answer string
  *   7b_cathedral: submission = image data URL (client downsizes before upload)
- * Failure is always exactly { success: false } — no hints.
+ * Failure is always exactly { success: false } - no hints.
  */
 export default async function handler(req: NextApiRequest, res: NextApiResponse<VerifyResult | { error: string }>) {
   if (!methodGuard(req, res, "POST")) return;
@@ -40,7 +40,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse<
     if (result.outcome === "rejected") return res.status(200).json({ success: false });
 
     const review = await createReview(stage, submission as string, `${result.provider}${result.detail ? `: ${result.detail}` : ""}`);
-    void notifyExecs(`📸 Photo for ${stage} needs manual approval on /exec (${result.provider}${result.detail ? ` — ${result.detail}` : ""})`);
+    void notifyExecs(`📸 Photo for ${stage} needs manual approval on /exec (${result.provider}${result.detail ? `: ${result.detail}` : ""})`);
     return res.status(200).json({ success: false, pending_review: true, review_id: review.id });
   }
 

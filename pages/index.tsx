@@ -32,8 +32,8 @@ function announcements(prev: PublicState, next: PublicState): Omit<Toast, "key">
     const who = thread === "local" ? "Local thread" : thread === "global" ? "Global thread" : "Someone";
     out.push({ text: `✓ ${who} solved “${stage.title}”`, kind: thread });
   }
-  if (!prev.outdoor_open && next.outdoor_open) out.push({ text: "🔓 Indoor round done — the outdoor board is open!" });
-  if (!prev.ransom_note && next.ransom_note) out.push({ text: "📨 Something was intercepted — check the top of the board." });
+  if (!prev.outdoor_open && next.outdoor_open) out.push({ text: "🔓 Indoor round done. The outdoor board is open!" });
+  if (!prev.ransom_note && next.ransom_note) out.push({ text: "📨 Something was intercepted. Check the top of the board." });
   if (!prev.complete && next.complete) out.push({ text: "🎉 Hunt complete!" });
   return out;
 }
@@ -107,7 +107,7 @@ export default function Board() {
         <Head>
           <title>SEP Pledge Hunt</title>
         </Head>
-        <p className="muted">{stale ? "Can't reach the board — retrying…" : "Loading the board…"}</p>
+        <p className="muted">{stale ? "Can't reach the board, retrying…" : "Loading the board…"}</p>
       </main>
     );
   }

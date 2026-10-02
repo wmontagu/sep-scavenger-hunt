@@ -1,5 +1,5 @@
 /**
- * npm run check-content — validate content/answers.json + clues.json.
+ * npm run check-content - validate content/answers.json + clues.json.
  * Prints TODOs (unfilled placeholders) and errors (inconsistent values), plus the
  * A1Z26 numbers for the term-sheet keyword. Exit code 1 on errors, or on TODOs
  * with --strict (use that right before the event).

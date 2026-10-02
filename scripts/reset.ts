@@ -1,5 +1,5 @@
 /**
- * npm run reset — restore hunt:board to its initial state (and clear photo reviews
+ * npm run reset - restore hunt:board to its initial state (and clear photo reviews
  * + advisor pings). Uses REDIS_URL if set, else the local .data file.
  * Against a deployed app you can also use the Reset button on /exec.
  */

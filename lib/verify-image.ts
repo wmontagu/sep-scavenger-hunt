@@ -1,19 +1,19 @@
 /**
- * verifyImage(stageId, image) — SERVER-ONLY.
+ * verifyImage(stageId, image) - SERVER-ONLY.
  *
  * Returns:
- *   "approved" — classifier said yes
- *   "rejected" — classifier said no
- *   "manual"   — no classifier configured, it errored / was rate limited / refused,
+ *   "approved" - classifier said yes
+ *   "rejected" - classifier said no
+ *   "manual"   - no classifier configured, it errored / was rate limited / refused,
  *                or IMAGE_NO_GOES_TO_MANUAL is on and it said no. The caller
  *                queues the photo for an exec to approve on /exec.
  *
  * Provider is picked by IMAGE_VERIFIER:
- *   claude  — Claude vision via @anthropic-ai/sdk (needs ANTHROPIC_API_KEY)
- *   jev     — JEV HTTP API (needs JEV_API_URL + JEV_API_KEY)
- *   manual  — always send to exec review (costs nothing)
- *   mock-yes / mock-no — for local dry runs and tests only
- *   auto (default) — claude if ANTHROPIC_API_KEY is set, else jev if JEV_* is set, else manual
+ *   claude  - Claude vision via @anthropic-ai/sdk (needs ANTHROPIC_API_KEY)
+ *   jev     - JEV HTTP API (needs JEV_API_URL + JEV_API_KEY)
+ *   manual  - always send to exec review (costs nothing)
+ *   mock-yes / mock-no - for local dry runs and tests only
+ *   auto (default) - claude if ANTHROPIC_API_KEY is set, else jev if JEV_* is set, else manual
  */
 import Anthropic from "@anthropic-ai/sdk";
 import { z } from "zod";
@@ -93,7 +93,7 @@ Set "matches" to true for yes, false for no.` },
 /**
  * JEV adapter. The JEV API shape isn't documented in the repo, so this assumes a
  * simple JSON POST and looks for a yes/no anywhere in the response. Adjust the
- * body/parse here if the real API differs — nothing else needs to change.
+ * body/parse here if the real API differs - nothing else needs to change.
  */
 export const jevClassifier: Classifier = async (prompt, image) => {
   const url = process.env.JEV_API_URL;

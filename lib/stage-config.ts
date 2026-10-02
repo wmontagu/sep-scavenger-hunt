@@ -1,6 +1,6 @@
 /**
  * SERVER-ONLY. Reads /content/answers.json and /content/clues.json at runtime
- * (never hardcodes answers) — import this only from API routes / scripts.
+ * (never hardcodes answers) - import this only from API routes / scripts.
  *
  * Answers can also be supplied via the HUNT_ANSWERS_JSON env var (whole JSON
  * object), which wins over the file. That lets you keep real answers out of git
@@ -133,7 +133,7 @@ export function expectedAnswer(stage: StageId, answers: Answers = getAnswers()):
       raw = (answers[stage] as { answer: string | null }).answer;
   }
   if (raw === null || raw === undefined) return null;
-  // "?" marks a character that isn't known yet (e.g. "?M81") — treat as unset.
+  // "?" marks a character that isn't known yet (e.g. "?M81") - treat as unset.
   if (String(raw).includes("?")) return null;
   const n = normalize(String(raw));
   return n.length ? n : null;
@@ -205,7 +205,7 @@ export function checkContent(answers: Answers = getAnswers(), clues: Clues = get
   return problems;
 }
 
-/** A1Z26 numbers for a keyword — handy when writing the term sheet. */
+/** A1Z26 numbers for a keyword - handy when writing the term sheet. */
 export function a1z26(word: string): number[] {
   return normalize(word)
     .replace(/[0-9]/g, "")

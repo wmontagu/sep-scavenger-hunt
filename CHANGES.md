@@ -265,3 +265,12 @@ Fix:
 - Prompt no longer says how to combine the halves: "Both halves of the company are back in one place. Each of you brought back a piece of a name. What is it?" (was "Interleave them — local first").
 - Split announcement: "Co-founders must split — at least 3 people in each group. Pick your strategy."
 - Tests: convergence hidden/locked with only local done, and with only global done; the prompt must not mention interleaving. 92/92 tests · typecheck · check-content clean.
+
+---
+
+## Iteration 15 - no em dashes (2026-10-01)
+
+- Every em dash removed from pledge-facing copy (`clues.json`, board UI, stage cards, banners, exec console). Each line was rewritten with a period, comma or colon so it reads naturally, e.g. "Stage 1: The Cap Table", "Co-founders must split. You need at least 3 people in each group."
+- Code comments in `lib/`, `pages/`, `scripts/`, `tests/` use plain hyphens now.
+- New test fails if an em dash reappears in clues.json or the UI files. 93/93 tests · typecheck · check-content clean.
+- Not touched: the internal markdown (answer key, CHANGES.md, SETUP.md, README), which pledges never see.

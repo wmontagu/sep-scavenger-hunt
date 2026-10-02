@@ -6,7 +6,7 @@ import { getStore } from "@/lib/store";
 import { isExec } from "@/lib/exec-auth";
 import { methodGuard, noStore } from "@/lib/http";
 
-/** GET /api/exec/state — everything, for the exec console. Passcode required. */
+/** GET /api/exec/state - everything, for the exec console. Passcode required. */
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   if (!methodGuard(req, res, "GET")) return;
   noStore(res);

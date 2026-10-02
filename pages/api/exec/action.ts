@@ -5,7 +5,7 @@ import { isExec } from "@/lib/exec-auth";
 import { methodGuard, noStore } from "@/lib/http";
 
 /**
- * POST /api/exec/action — passcode required.
+ * POST /api/exec/action - passcode required.
  *   { action: "open_outdoor" | "close_outdoor" }
  *   { action: "complete", value: boolean }
  *   { action: "set_stage", stage, solved: boolean }       manual override

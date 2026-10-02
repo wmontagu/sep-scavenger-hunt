@@ -60,7 +60,7 @@ const execState = () => http("GET", "/api/exec/state", undefined, true).then((r)
 
 async function solveText(stage: StageId, answer: string | null) {
   if (!answer) {
-    console.log(`  … ${stage}: answer not set yet — force-solving via exec override`);
+    console.log(`  … ${stage}: answer not set yet - force-solving via exec override`);
     await exec({ action: "set_stage", stage, solved: true });
     return null;
   }
@@ -126,7 +126,7 @@ async function main() {
   let globalShare: string | undefined;
   const verifier = (await execState()).image_verifier as string;
   if ((verifier === "claude" || verifier === "jev") && !flag("--allow-paid")) {
-    console.log(`  … server uses ${verifier} (paid) — force-solving 7b instead (pass --allow-paid to really call it)`);
+    console.log(`  … server uses ${verifier} (paid) - force-solving 7b instead (pass --allow-paid to really call it)`);
     await exec({ action: "set_stage", stage: "7b_cathedral", solved: true });
     globalShare = (await execState()).board.global_share;
   } else {
@@ -145,7 +145,7 @@ async function main() {
       const again = (await http("GET", `/api/review-status?id=${r.review_id}`)).json;
       check(again.share === undefined, "share claimed only once");
     } else {
-      check(false, `photo rejected by ${verifier} (a 1x1 test PNG — expected with a real classifier)`);
+      check(false, `photo rejected by ${verifier} (a 1x1 test PNG - expected with a real classifier)`);
       await exec({ action: "set_stage", stage: "7b_cathedral", solved: true });
       globalShare = (await execState()).board.global_share;
     }
@@ -183,7 +183,7 @@ async function main() {
 
   if (!flag("--keep")) {
     await exec({ action: "reset", confirm: "RESET" });
-    console.log("\n(reset back to initial state — pass --keep to leave the finished board up)");
+    console.log("\n(reset back to initial state - pass --keep to leave the finished board up)");
   }
   console.log(`\n${failures ? `${failures} FAILURE(S)` : "ALL CHECKS PASSED"}`);
   process.exit(failures ? 1 : 0);

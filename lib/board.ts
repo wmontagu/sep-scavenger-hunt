@@ -83,7 +83,7 @@ export async function resetBoard(store: Store = getStore()): Promise<Board> {
 }
 
 // ---------------------------------------------------------------------------
-// Public projection — this is the ONLY thing /api/state returns.
+// Public projection - this is the ONLY thing /api/state returns.
 // Never includes shares, answers, or prompts; clue text only once reached.
 // ---------------------------------------------------------------------------
 
@@ -248,7 +248,7 @@ export function publicState(board: Board): PublicState {
 export interface VerifyResult {
   success: boolean;
   already_solved?: boolean;
-  /** 4-char thread share — only on the request that first solved 6_gates / 7b_cathedral. */
+  /** 4-char thread share - only on the request that first solved 6_gates / 7b_cathedral. */
   share?: string;
   share_message?: string;
   /** 4_fence / 7a success: the next riddle, inline. */
@@ -426,7 +426,7 @@ export interface ReviewStatus {
 
 /**
  * Polled by the device that submitted the photo. The review id (random UUID) is
- * the capability — only that device knows it. The share is handed out once.
+ * the capability - only that device knows it. The share is handed out once.
  */
 export async function claimReview(id: string, store: Store = getStore()): Promise<ReviewStatus> {
   const answers = getAnswers();

@@ -2,7 +2,7 @@ import type { NextApiRequest, NextApiResponse } from "next";
 import { claimReview } from "@/lib/board";
 import { methodGuard, noStore } from "@/lib/http";
 
-/** GET /api/review-status?id=<review id> — polled by the device that uploaded the photo. */
+/** GET /api/review-status?id=<review id> - polled by the device that uploaded the photo. */
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   if (!methodGuard(req, res, "GET")) return;
   noStore(res);

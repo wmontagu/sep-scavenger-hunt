@@ -1,5 +1,5 @@
 /**
- * The Claude provider, with @anthropic-ai/sdk mocked out — no network, no credits.
+ * The Claude provider, with @anthropic-ai/sdk mocked out - no network, no credits.
  * Checks the request shape and the fallback / budget behaviour.
  */
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";

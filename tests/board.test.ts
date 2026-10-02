@@ -154,7 +154,7 @@ describe("shares", () => {
   it("6_gates returns MGNI only to the solving request and never via state", async () => {
     const r = await verifyText("6_gates", "x7q2");
     expect(r).toMatchObject({ success: true, share: "MGNI" });
-    expect(r.share_message).toContain("find whoever took the other path");
+    expect(r.share_message).toContain("Find whoever took the other path");
     const again = await verifyText("6_gates", "x7q2");
     expect(again.share).toBeUndefined();
     expect(again.already_solved).toBe(true);

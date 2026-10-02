@@ -5,7 +5,7 @@ import type { Answers, ContentProblem, StageId } from "@/lib/stage-config";
 import { local, postJson } from "@/components/client-utils";
 
 /**
- * Exec console — not linked from the pledge board. Everything here is behind
+ * Exec console - not linked from the pledge board. Everything here is behind
  * EXEC_PASSCODE; this page itself holds no secrets.
  */
 
@@ -143,7 +143,7 @@ export default function Exec() {
       <section className="card">
         <dl className="kv">
           <dt>storage</dt>
-          <dd>{data.storage === "redis" ? "redis ✓" : "file (⚠ lost on redeploy — add Redis for the event)"}</dd>
+          <dd>{data.storage === "redis" ? "redis ✓" : "file (⚠ lost on redeploy, add Redis for the event)"}</dd>
           <dt>photo check</dt>
           <dd>
             {data.image_verifier}
@@ -154,15 +154,15 @@ export default function Exec() {
           <dt>webhook</dt>
           <dd>{data.webhook ? "on" : "off (watch this page for pings)"}</dd>
           <dt>outdoor</dt>
-          <dd>{indoorDone ? "OPEN (indoor round solved)" : board.outdoor_open ? "OPEN (forced by exec)" : "closed — opens when stages 1-3 are solved"}</dd>
+          <dd>{indoorDone ? "OPEN (indoor round solved)" : board.outdoor_open ? "OPEN (forced by exec)" : "closed (opens when stages 1-3 are solved)"}</dd>
           <dt>ransom note</dt>
           <dd>{board.ransom_note_visible ? "visible" : "hidden"}</dd>
           <dt>complete</dt>
           <dd>{board.complete ? "YES" : "no"}</dd>
           <dt>local share</dt>
-          <dd>{board.local_share ?? "—"} <span className="muted">(answer key: {data.answers.shares.local})</span></dd>
+          <dd>{board.local_share ?? "-"} <span className="muted">(answer key: {data.answers.shares.local})</span></dd>
           <dt>global share</dt>
-          <dd>{board.global_share ?? "—"} <span className="muted">(answer key: {data.answers.shares.global})</span></dd>
+          <dd>{board.global_share ?? "-"} <span className="muted">(answer key: {data.answers.shares.global})</span></dd>
         </dl>
         {data.content_problems.length > 0 && (
           <div style={{ marginTop: 12 }}>

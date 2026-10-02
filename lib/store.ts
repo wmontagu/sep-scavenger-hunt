@@ -1,12 +1,12 @@
 /**
  * Tiny key/value store abstraction.
  *
- *  - RedisStore  — used when REDIS_URL is set (Railway Redis plugin, Upstash, etc.).
+ *  - RedisStore  - used when REDIS_URL is set (Railway Redis plugin, Upstash, etc.).
  *                  Atomic updates via WATCH/MULTI optimistic retries.
- *  - FileStore   — local dev fallback: one JSON file under .data/, serialized by an
+ *  - FileStore   - local dev fallback: one JSON file under .data/, serialized by an
  *                  in-process lock. Fine for a single Railway instance too, but data
  *                  is lost on redeploy, so use Redis for the real event.
- *  - MemoryStore — unit tests.
+ *  - MemoryStore - unit tests.
  */
 import fs from "node:fs";
 import path from "node:path";

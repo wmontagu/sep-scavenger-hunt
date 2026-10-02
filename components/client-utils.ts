@@ -57,7 +57,7 @@ export function downscaleImage(file: File, max = 1280, quality = 0.82): Promise<
     };
     img.onerror = () => {
       URL.revokeObjectURL(url);
-      reject(new Error("Couldn't read that image — try taking the photo again."));
+      reject(new Error("Couldn't read that image. Try taking the photo again."));
     };
     img.src = url;
   });

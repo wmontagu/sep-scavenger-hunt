@@ -5,7 +5,7 @@ import { clientIp, methodGuard, noStore } from "@/lib/http";
 import { rateLimit } from "@/lib/rate-limit";
 import { notifyExecs } from "@/lib/notify";
 
-/** POST /api/advisor-request { stage, message? } — "we're stuck" ping. Outdoor stages only. */
+/** POST /api/advisor-request { stage, message? } - "we're stuck" ping. Outdoor stages only. */
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   if (!methodGuard(req, res, "POST")) return;
   noStore(res);

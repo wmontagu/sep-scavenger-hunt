@@ -32,3 +32,17 @@ describe("public/ (everything here is downloadable by anyone)", () => {
     for (const d of docs) expect(fs.existsSync(path.join(PUBLIC, d.src))).toBe(true);
   });
 });
+
+describe("pledge-facing copy", () => {
+  it("has no em dashes (content and UI strings)", () => {
+    const files = [
+      path.join(REAL_CONTENT, "clues.json"),
+      "pages/index.tsx",
+      "pages/exec.tsx",
+      "components/StageCard.tsx",
+      "components/client-utils.ts",
+    ];
+    const hits = files.filter((f) => fs.readFileSync(f, "utf8").includes("\u2014"));
+    expect(hits).toEqual([]);
+  });
+});

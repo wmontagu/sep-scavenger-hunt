@@ -1,5 +1,5 @@
 /**
- * Ping the execs. Posts to EXEC_WEBHOOK_URL if set — the body carries both `text`
+ * Ping the execs. Posts to EXEC_WEBHOOK_URL if set - the body carries both `text`
  * (Slack incoming webhooks) and `content` (Discord webhooks), so either works.
  * Everything is also logged and visible on /exec, so a webhook is optional.
  */

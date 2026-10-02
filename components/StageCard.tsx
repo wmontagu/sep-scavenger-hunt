@@ -57,7 +57,7 @@ export function StageCard({ stage, thread, shareMessage, advisorBlurb, onSolved 
       {stage.overlay && !stage.solved && (
         <div className="overlay-box">
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src={stage.overlay} alt="Outline of the sign with circled letter positions — line it up with what you find" />
+          <img src={stage.overlay} alt="Outline of the sign with circled letter positions. Line it up with what you find" />
           {stage.overlay_caption && <div className="overlay-caption">{stage.overlay_caption}</div>}
         </div>
       )}
@@ -73,7 +73,7 @@ export function StageCard({ stage, thread, shareMessage, advisorBlurb, onSolved 
 
       {stage.reveal && <p className="feedback good">{stage.reveal}</p>}
       {inlineClue && stage.solved && (stage.id === "7a_wqed" || stage.id === "4_fence") && (
-        <p className="feedback good">Unlocked — the next clue is just below. ↓</p>
+        <p className="feedback good">Unlocked! The next clue is just below. ↓</p>
       )}
 
       {share && (
@@ -106,7 +106,7 @@ function TextAnswer({ stageId, onResult }: { stageId: string; onResult: (r: Veri
         stage: stageId,
         submission: value,
       });
-      if (status === 429) setMsg({ kind: "bad", text: "Too many guesses — wait a minute." });
+      if (status === 429) setMsg({ kind: "bad", text: "Too many guesses. Wait a minute." });
       else if (data.success) {
         setMsg({ kind: "good", text: data.already_solved ? "Already solved by your team." : "Correct." });
         setValue("");
@@ -118,7 +118,7 @@ function TextAnswer({ stageId, onResult }: { stageId: string; onResult: (r: Veri
         requestAnimationFrame(() => inputRef.current?.select());
       }
     } catch {
-      setMsg({ kind: "bad", text: "Network hiccup — try again." });
+      setMsg({ kind: "bad", text: "Network hiccup, try again." });
     } finally {
       setBusy(false);
     }
@@ -201,7 +201,7 @@ function PhotoAnswer({
             text:
               data.status === "rejected"
                 ? "That one didn't pass review. Try another photo."
-                : "That photo is no longer in the review queue — please submit again.",
+                : "That photo is no longer in the review queue. Please submit again.",
           });
         }
       } catch {
@@ -234,8 +234,8 @@ function PhotoAnswer({
     setMsg({ kind: "pending", text: "Checking your photo…" });
     try {
       const { status, data } = await postJson<VerifyResult>("/api/verify", { stage: stageId, submission: preview });
-      if (status === 429) setMsg({ kind: "bad", text: "Too many uploads — wait a minute." });
-      else if (status !== 200) setMsg({ kind: "bad", text: "Couldn't upload that image — try again." });
+      if (status === 429) setMsg({ kind: "bad", text: "Too many uploads. Wait a minute." });
+      else if (status !== 200) setMsg({ kind: "bad", text: "Couldn't upload that image. Try again." });
       else if (data.success) {
         setMsg({ kind: "good", text: data.already_solved ? "Already solved by your team." : "Approved!" });
         setPreview(null);
@@ -244,12 +244,12 @@ function PhotoAnswer({
         local.set(reviewKeyFor(stageId), data.review_id);
         setReviewId(data.review_id);
         setPreview(null);
-        setMsg({ kind: "pending", text: "Your photo is with an exec for approval — keep this page open…" });
+        setMsg({ kind: "pending", text: "Your photo is with an exec for approval. Keep this page open…" });
       } else {
         setMsg({ kind: "bad", text: "That doesn't look right. Try another photo." });
       }
     } catch {
-      setMsg({ kind: "bad", text: "Network hiccup — try again." });
+      setMsg({ kind: "bad", text: "Network hiccup, try again." });
     } finally {
       setBusy(false);
     }
@@ -301,7 +301,7 @@ function AdvisorButton({ stageId, blurb }: { stageId: string; blurb: string }) {
           <button className="ghost" onClick={ask} disabled={state === "sending"}>
             Ask an advisor
           </button>
-          <span>{state === "error" ? "Couldn't reach the execs — try again." : blurb}</span>
+          <span>{state === "error" ? "Couldn't reach the execs. Try again." : blurb}</span>
         </>
       )}
     </div>

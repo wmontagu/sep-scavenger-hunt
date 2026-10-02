@@ -2,9 +2,9 @@
   "_readme": "Pledge-facing copy. Served ONLY through /api/state (and only once each piece is reached), never bundled into client JS, so the 7b riddle / ransom note can't be read early from page source.",
   "board": {
     "title": "SEP Pledge Hunt",
-    "tagline": "One company. Fourteen founders. No accounts, no teams — every solve counts for everyone.",
+    "tagline": "One company. Fourteen founders. No accounts, no teams. Every solve counts for everyone.",
     "outdoor_locked": "Solve all three indoor stages to unlock the outdoor board.",
-    "split_announcement": "Co-founders must split — at least 3 people in each group. Pick your strategy.",
+    "split_announcement": "Co-founders must split. You need at least 3 people in each group. Pick your strategy.",
     "threads": {
       "local": {
         "title": "Stay close, dig deep",
@@ -18,7 +18,7 @@
   },
   "stages": {
     "1_cap_table": {
-      "title": "Stage 1 — The Cap Table",
+      "title": "Stage 1: The Cap Table",
       "prompt": "Rank the founders. What does the cap table spell?",
       "documents": [
         {
@@ -28,7 +28,7 @@
       ]
     },
     "2_term_sheet": {
-      "title": "Stage 2 — The Redacted Term Sheet",
+      "title": "Stage 2: The Redacted Term Sheet",
       "prompt": "Most of it is blacked out. The numbers that survived still say something.",
       "documents": [
         {
@@ -42,7 +42,7 @@
       ]
     },
     "3_pitch_deck": {
-      "title": "Stage 3 — The Pitch Deck",
+      "title": "Stage 3: The Pitch Deck",
       "prompt": "Fill in every blank from what's around you. What's the pitch really about?",
       "documents": [
         {
@@ -53,33 +53,33 @@
     },
     "4_fence": {
       "title": "The OG guerrilla marketing stunt",
-      "clue": "Before feeds, before flyers, this campus had one billboard nobody owned. Claim it after midnight, paint your message, guard it until dawn — and for a day, everyone sees you. Then someone paints right over you. Thousands of coats deep, it's the original guerrilla marketing stunt. Go there. A founder was out late too, and left a note close by.",
-      "prompt": "You'll find your answer there — look for something scrawled in black where you'd normally take a break. Where is it sending you?"
+      "clue": "Before feeds, before flyers, this campus had one billboard nobody owned. Claim it after midnight, paint your message, guard it until dawn, and for a day everyone sees you. Then someone paints right over you. Thousands of coats deep, it's the original guerrilla marketing stunt. Go there. A founder was out late too, and left a note close by.",
+      "prompt": "You'll find your answer there. Look for something scrawled in black where you'd normally take a break. Where is it sending you?"
     },
     "6_gates": {
       "title": "Our pitch",
-      "clue": "OUR PITCH: We don't believe great work stays in one lane. We built the connective infrastructure that lets ideas cross — straight from the arts into computers, no detour required. Named for the professor who told us to take our childhood dreams seriously. Cross it to see what we're building.",
-      "spiral_clue": "Once you've crossed: we started spiraling the moment the term sheet fell through. Cash in hand: $840K. Burn rate: $20K/month. That's how many months we have left — and how many steps separate us from the truth.",
+      "clue": "OUR PITCH: We don't believe great work stays in one lane. We built the connective infrastructure that lets ideas cross, straight from the arts into computers, no detour required. Named for the professor who told us to take our childhood dreams seriously. Cross it to see what we're building.",
+      "spiral_clue": "Once you've crossed: we started spiraling the moment the term sheet fell through. Cash in hand: $840K. Burn rate: $20K/month. That's how many months we have left, and how many steps separate us from the truth.",
       "prompt": "When you find the truth, enter it here."
     },
     "7a_wqed": {
       "title": "Go wide before you go deep",
-      "subtitle": "Global thread — the blitzscaling play",
-      "clue": "Some companies win by owning their block. We're playing a different game — go wide before you go deep. Our expansion play started by studying how the old broadcast empires scaled a message to millions before the internet ever existed. Find where that history is written down.",
+      "subtitle": "Global thread: the blitzscaling play",
+      "clue": "Some companies win by owning their block. We're playing a different game: go wide before you go deep. Our expansion play started by studying how the old broadcast empires scaled a message to millions before the internet ever existed. Find where that history is written down.",
       "overlay_caption": "When you find it, hold this up against what's written there. The circled letters, read in order, are your answer."
     },
     "7b_cathedral": {
       "title": "The round closes",
-      "clue": "Growth-stage companies don't stay small — they scale until they're the tallest thing in the market. Find the tallest building within a mile of CMU. That's where this round closes. Selfie, 3 of you, once you're there.",
+      "clue": "Growth-stage companies don't stay small. They scale until they're the tallest thing in the market. Find the tallest building within a mile of CMU. That's where this round closes. Selfie, 3 of you, once you're there.",
       "upload_label": "Upload your selfie (3 of you, building behind you)"
     },
     "8_convergence": {
       "title": "Convergence",
       "prompt": "Both halves of the company are back in one place. Each of you brought back a piece of a name. What is it?",
-      "reveal": "MCGINNIS — McGinnis Hall. Both halves of the company are back together. Watch the board…"
+      "reveal": "MCGINNIS. McGinnis Hall. Both halves of the company are back together. Watch the board…"
     }
   },
-  "share_message": "You've got part of a code — find whoever took the other path and combine what you've each got.",
+  "share_message": "You've got part of a code. Find whoever took the other path and combine what you've each got.",
   "advisor_blurb": "Even real founders bring in advisors when they're stuck.",
   "ransom_note": "Word from our sources: they've secured $61M to close a Series C, locking down 1,993 more LOIs. Take a bus to the place of the meeting.",
   "complete_message": "You made it. Company rescued. Welcome to SEP.",
