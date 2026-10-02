@@ -76,7 +76,8 @@ export function StageCard({ stage, thread, shareMessage, advisorBlurb, onSolved 
         <p className="feedback good">Unlocked! The next clue is just below. ↓</p>
       )}
 
-      {share && (
+      {/* The saved share can outlive a board wipe or an exec un-solve, so only trust it while the server says solved. */}
+      {share && stage.solved && (
         <div className="share">
           <div className="muted small">Your half of the code</div>
           <div className="code">{share}</div>
