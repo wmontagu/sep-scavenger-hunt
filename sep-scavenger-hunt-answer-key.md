@@ -201,7 +201,7 @@ M(local) C(global) G(local) I(global) N(local) N(global) I(local) S(global)
 **Answer (case-insensitive, trimmed):** `MCGINNIS`
 
 **On success:** flips the ransom note visible for everyone simultaneously, and the
-app should confirm on-screen what MCGINNIS means (a building) so there's no dead
+app should confirm on-screen what MCGINNIS means (the McGinnis Venture Competition at CMU, not a building) so there's no dead
 moment once it's typed in.
 
 ### Stage 9 — Ransom Note
