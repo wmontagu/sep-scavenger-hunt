@@ -1,0 +1,41 @@
+{
+  "_readme": "SERVER-ONLY. Never import this from a page/component. Edit values here (or paste the whole object into the HUNT_ANSWERS_JSON env var to override without committing answers). Matching is case-insensitive and ignores spaces/punctuation. A null answer, or one containing '?', means 'not filled in yet' and that stage will reject everything. Run `npm run check-content` after editing.",
+  "1_cap_table": {
+    "answer": "BRAVE",
+    "_note": "Take the ownership %s whose last digit is 9, 7, 5, 3, 1 (descending): 29% Benjamin (B), 17%/7% Rithul/Riya (R), 15% Angel (A), 3% Vedansh (V), 11% Evan (E). Koza (18%) is the decoy."
+  },
+  "2_term_sheet": {
+    "answer": "FUNDED",
+    "_note": "Visible numbers in order: 6% discount (F), 21% option pool (U), 14x liq pref (N), 4 board seats (D), 5-month vesting cliff (E), 4-month runway (D)."
+  },
+  "3_pitch_deck": {
+    "answer": "SM81",
+    "_note": "S = first letter of the first word on the top-left wooden badge (Welcome Center), M = Swartz Center wall words, 8 = Millie's classic price, 1 = last digit of TEP 2701."
+  },
+  "4_fence": {
+    "answer": "HUNT",
+    "also_accept": ["HUNT LIBRARY"],
+    "_note": "On-screen marketing hint -> the Fence; '5:30 in white - SEP' written on the bench next to it points to Hunt Library. Solving this shows the OUR PITCH + spiral riddles in the app (footbridge -> Gates). Nothing is printed."
+  },
+  "6_gates": {
+    "code": "X7G0",
+    "also_accept": ["X7GO"],
+    "burn_rate_k": 20,
+    "cash_on_hand_k": 840,
+    "step_count": 42,
+    "_note": "42 real steps down the spiral. The in-app spiral riddle reads $840K cash / $20K per month burn = 42. Pillar at step 42 is chalked X7G0; X7GO (letter O) is also accepted since the zero is easy to misread."
+  },
+  "7a_wqed": {
+    "answer": "LAUNCH"
+  },
+  "7b_cathedral": {
+    "image_prompt": "Does this photo show 3 people standing in front of a tall Gothic stone building? yes/no"
+  },
+  "8_convergence": {
+    "answer": "MCGINNIS"
+  },
+  "shares": {
+    "local": "MGNI",
+    "global": "CINS"
+  }
+}

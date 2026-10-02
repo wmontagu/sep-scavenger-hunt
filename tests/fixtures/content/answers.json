@@ -1,0 +1,35 @@
+{
+  "_readme": "SERVER-ONLY. Never import this from a page/component. Edit values here (or paste the whole object into the HUNT_ANSWERS_JSON env var to override without committing answers). Matching is case-insensitive and ignores spaces/punctuation. A null answer means 'not filled in yet' and that stage will reject everything. Run `npm run check-content` after editing.",
+  "1_cap_table": {
+    "answer": "BRAVE"
+  },
+  "2_term_sheet": {
+    "answer": "SEED"
+  },
+  "3_pitch_deck": {
+    "answer": "PITCH"
+  },
+  "4_fence": {
+    "answer": "HUNT",
+    "also_accept": ["HUNT LIBRARY"]
+  },
+  "6_gates": {
+    "code": "X7Q2",
+    "burn_rate_k": 20,
+    "cash_on_hand_k": 280,
+    "step_count": 14
+  },
+  "7a_wqed": {
+    "answer": "LAUNCH"
+  },
+  "7b_cathedral": {
+    "image_prompt": "Does this photo show 3 people standing in front of a tall Gothic stone building? yes/no"
+  },
+  "8_convergence": {
+    "answer": "MCGINNIS"
+  },
+  "shares": {
+    "local": "MGNI",
+    "global": "CINS"
+  }
+}
