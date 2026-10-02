@@ -191,9 +191,11 @@ describe("convergence → ransom note → complete", () => {
 
     expect((await verifyText("4_fence", "HUNT")).success).toBe(true);
     const local = await verifyText("6_gates", "X7Q2");
-    expect(publicState(await getBoard()).convergence?.id).toBe("8_convergence");
+    expect(publicState(await getBoard()).convergence).toBeNull();
     await verifyText("7a_wqed", "LAUNCH");
     const global = await markSolved("7b_cathedral");
+    expect(publicState(await getBoard()).convergence?.id).toBe("8_convergence");
+    expect(publicState(await getBoard()).convergence?.prompt).not.toMatch(/interleave|local first/i);
 
     // interleave local-first
     let combined = "";
@@ -218,13 +220,26 @@ describe("convergence → ransom note → complete", () => {
     expect(done.complete_message).toBeTruthy();
   });
 
-  it("convergence stays hidden AND locked until a thread has a share", async () => {
+  it("convergence stays hidden AND locked until BOTH threads have a share", async () => {
     await setFlag("outdoor_open", true);
     expect(publicState(await getBoard()).convergence).toBeNull();
     expect(await verifyText("8_convergence", "MCGINNIS")).toEqual({ success: false });
     await verifyText("4_fence", "HUNT");
     await verifyText("6_gates", "X7Q2");
+    expect(publicState(await getBoard()).convergence).toBeNull();
+    expect(await verifyText("8_convergence", "MCGINNIS")).toEqual({ success: false });
+    await verifyText("7a_wqed", "LAUNCH");
+    await markSolved("7b_cathedral");
+    expect(publicState(await getBoard()).convergence?.id).toBe("8_convergence");
     expect((await verifyText("8_convergence", "MCGINNIS")).success).toBe(true);
+  });
+
+  it("convergence also waits when only the global thread is done", async () => {
+    await setFlag("outdoor_open", true);
+    await verifyText("7a_wqed", "LAUNCH");
+    await markSolved("7b_cathedral");
+    expect(publicState(await getBoard()).convergence).toBeNull();
+    expect(await verifyText("8_convergence", "MCGINNIS")).toEqual({ success: false });
   });
 });
 

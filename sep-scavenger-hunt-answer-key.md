@@ -73,7 +73,7 @@ resolved by a real Tepper-specific fact you plant/scout:
 
 ## Outdoor board — opens ~9:45, two parallel threads
 
-**Framing announcement:** "Co-founders must split." Pledges are pre-paired as
+**Framing announcement:** "Co-founders must split — at least 3 people in each group." Pledges are pre-paired as
 co-founder duos; the pairs assigned to the local thread are specifically CS majors,
 since CS majors have weekend card access to Gates-Hillman — this solves the
 building-access problem directly, no exec needs to be stationed at the door.

@@ -256,3 +256,12 @@ Fix:
 - `.env.example` added to `.gitignore` (it was untracked; this keeps keys out of future commits). Its header comment now says it's the real settings file.
 - `IMAGE_VERIFIER` changed from `manual` to `auto` in it: `manual` would ignore an API key. With `auto`, adding `ANTHROPIC_API_KEY` turns the Claude photo check on, and while it's blank photos still go to manual review.
 - Verified the loader picks up values. `EXEC_PASSCODE` and `ANTHROPIC_API_KEY` are still blank.
+
+---
+
+## Iteration 14 — convergence waits for both threads; smaller hint (2026-10-01)
+
+- `8_convergence` now appears (and accepts answers) only once **both** `6_gates` and `7b_cathedral` are solved, so one thread can't finish alone. This is enforced in both `publicState` and `stageOpen`.
+- Prompt no longer says how to combine the halves: "Both halves of the company are back in one place. Each of you brought back a piece of a name. What is it?" (was "Interleave them — local first").
+- Split announcement: "Co-founders must split — at least 3 people in each group. Pick your strategy."
+- Tests: convergence hidden/locked with only local done, and with only global done; the prompt must not mention interleaving. 92/92 tests · typecheck · check-content clean.

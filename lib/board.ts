@@ -205,9 +205,9 @@ export function publicState(board: Board): PublicState {
     }
   }
 
-  // Convergence appears once either thread has produced its half.
+  // Convergence appears only once BOTH threads have produced their half.
   const convergence: PublicStage | null =
-    open && (solved("6_gates") || solved("7b_cathedral") || solved("8_convergence"))
+    open && ((solved("6_gates") && solved("7b_cathedral")) || solved("8_convergence"))
       ? {
           id: "8_convergence",
           title: s["8_convergence"].title,
@@ -274,8 +274,8 @@ export function stageOpen(board: Board, stage: StageId): boolean {
     case "6_gates":
       return outdoorOpen(board) && board.stages["4_fence"].solved;
     case "8_convergence":
-      // same rule as the UI: open once at least one thread has produced its half
-      return outdoorOpen(board) && (board.stages["6_gates"].solved || board.stages["7b_cathedral"].solved);
+      // same rule as the UI: open only once both threads have produced their half
+      return outdoorOpen(board) && board.stages["6_gates"].solved && board.stages["7b_cathedral"].solved;
     case "7b_cathedral":
       return outdoorOpen(board) && board.stages["7a_wqed"].solved;
   }

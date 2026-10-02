@@ -4,7 +4,7 @@
     "title": "SEP Pledge Hunt",
     "tagline": "One company. Fourteen founders. No accounts, no teams — every solve counts for everyone.",
     "outdoor_locked": "Solve all three indoor stages to unlock the outdoor board.",
-    "split_announcement": "Co-founders must split. Pick your strategy.",
+    "split_announcement": "Co-founders must split — at least 3 people in each group. Pick your strategy.",
     "threads": {
       "local": {
         "title": "Stay close, dig deep",
@@ -53,7 +53,7 @@
     },
     "8_convergence": {
       "title": "Convergence",
-      "prompt": "Each thread holds half of a name. Interleave them — local first — and enter it here.",
+      "prompt": "Both halves of the company are back in one place. Each of you brought back a piece of a name. What is it?",
       "reveal": "MCGINNIS confirmed — both halves of the company are back together. Watch the board…",
       "_todo": "Answer key says the app should say what MCGINNIS means (a building). Replace `reveal` with the one-liner you want."
     }
