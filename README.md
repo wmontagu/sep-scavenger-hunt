@@ -1,43 +1,82 @@
 # SEP Scavenger Hunt
 
-A live, browser-based scavenger hunt for a group of pledges (built for ~14 people, one shared board, no accounts).
-Pledges open a web page on their phones and solve stages together. Execs run the event from a hidden `/exec` console.
-Built with Next.js. Free to reuse and change (MIT license).
+A live, phone-based scavenger hunt for a group of pledges (built for ~14 people, one shared board, no accounts).
+Pledges open a web page on their phones and solve stages together. Execs run the event from a hidden `/exec` page.
+Free to reuse and change (MIT license).
 
-**You do not need to be an engineer to reuse this.** Everything you'd change (answers, clues, images) is a text or image file,
-and Claude Code or Cursor can do the editing for you.
+**You do not need to be a programmer.** Everything you would change (answers, clues, images) is a plain text or image file.
+If you have ever finished 15-110 or 15-112, you know more than enough. And Claude Code or Cursor can do the typing for you.
 
----
-
-## Fastest start: let Claude Code or Cursor do it
-
-1. Install [Node.js](https://nodejs.org) (LTS) and [Claude Code](https://claude.com/claude-code) or [Cursor](https://cursor.com).
-2. Open a terminal and run:
-   ```bash
-   git clone https://github.com/wmontagu/sep-scavenger-hunt.git my-hunt
-   cd my-hunt
-   ```
-   (No git? Use the green **Code > Download ZIP** button on GitHub, unzip it, and open that folder.)
-3. Open the `my-hunt` folder in Cursor, or type `claude` in the terminal to start Claude Code, then paste:
-
-   > Read README.md, docs/HUNT-OVERVIEW.md, docs/CUSTOMIZING.md, docs/SETUP.md and docs/DEPLOYMENT.md. Set this project up for me: install dependencies, create .env.local with a passcode I choose, and run it locally so I can see it. Then help me rewrite content/answers.json and content/clues.json for my own event (I'll tell you the stages, answers and locations). When I'm ready, walk me through deploying it to Railway (or Vercel) and putting it on my own domain.
-
-That's it. The sections below are the same steps by hand.
+**Time needed:** about 30 minutes to see it running, a few hours to rewrite the content for your event, about 20 minutes to put it online.
 
 ---
 
-## Run it on your computer (5 minutes)
+## Pick your path
+
+| Path | You need | Best for |
+|---|---|---|
+| **A. Browser only** | A free GitHub account and a free Railway account | People who do not want to install anything |
+| **B. Cursor** (recommended) | Free [Cursor](https://cursor.com) + [Node.js](https://nodejs.org) | Editing content with an AI helper, testing on your laptop |
+| **C. Claude Code** | Claude Code + Node.js | Same as B, but in a terminal |
+
+### Path A: browser only (no installs)
+1. Make a free account at [github.com](https://github.com). Open this repository's page and click **Fork** (top right). You now have your own copy.
+2. In your copy, click the files in `content/` (`answers.json`, `clues.json`), click the pencil icon, edit the text, and click **Commit changes**. To swap an image, open `public/assets/docs/`, click **Add file > Upload files**, and upload a picture with the same filename.
+3. Follow **Option A (Railway)** in [docs/DEPLOYMENT.md](docs/DEPLOYMENT.md) to put your copy online. Railway rebuilds the site every time you commit.
+
+Downside: you cannot test locally, so use the dry run described in the deployment guide.
+
+### Path B: Cursor (easiest way to test on your laptop)
+1. Install **Node.js** (download the "LTS" version from [nodejs.org](https://nodejs.org), click through the installer) and **Cursor**.
+2. Get the code. Easiest: on this repo's GitHub page click the green **Code** button > **Download ZIP**, then unzip it (right-click > Extract All).
+   (If you have git: `git clone https://github.com/wmontagu/sep-scavenger-hunt.git`.)
+3. In Cursor: **File > Open Folder** and choose the unzipped folder.
+4. Open Cursor's chat (the chat icon, or Ctrl+L / Cmd+L) and paste this:
+
+   > Read README.md, docs/HUNT-OVERVIEW.md, docs/CUSTOMIZING.md, docs/SETUP.md and docs/DEPLOYMENT.md. I am not a programmer. Set this project up for me: install dependencies, create .env.local with a passcode I choose, and run it locally so I can see it in my browser. Then interview me about my event and rewrite content/answers.json and content/clues.json. When I'm ready, walk me through putting it online with Railway, click by click.
+
+5. Approve the commands it asks to run. When it says the site is running, open <http://localhost:3000> in your browser.
+
+### Path C: Claude Code
+1. Install Node.js (as above), then open a terminal (Windows: search "PowerShell"; Mac: search "Terminal") and install Claude Code by following [claude.com/claude-code](https://claude.com/claude-code).
+2. In the terminal: `cd` into the unzipped or cloned folder (for example `cd Downloads/sep-scavenger-hunt-main`), then type `claude`.
+3. Paste the same prompt as in Path B step 4.
+
+---
+
+## Do it by hand (optional, if you want to see what the AI is doing)
+
+Open a terminal **inside the project folder** (in Cursor: Terminal > New Terminal) and run these one at a time:
 
 ```bash
-npm install
-cp .env.example .env.local        # Windows PowerShell: Copy-Item .env.example .env.local
-# open .env.local and change EXEC_PASSCODE to something only execs know
-npm run dev
+npm install                       # downloads the libraries the project needs (takes a minute)
+cp .env.example .env.local        # makes your private settings file. In Windows PowerShell this also works.
 ```
+Now open `.env.local` in any text editor and change `EXEC_PASSCODE=change-me` to a passcode only execs know. Save it, then:
+```bash
+npm run dev                       # starts the site on your computer. Leave this window open.
+```
+- Pledge page: <http://localhost:3000>
+- Exec page: <http://localhost:3000/exec> (not linked anywhere; asks for your passcode)
+- Stop it with Ctrl+C. Progress is saved in `.data/hunt.json`; `npm run reset` wipes it.
 
-- Pledge board: <http://localhost:3000>
-- Exec console: <http://localhost:3000/exec> (not linked anywhere; asks for your passcode)
-- Progress is saved in `.data/hunt.json`. `npm run reset` wipes it.
+If something fails: `npm: command not found` means Node.js isn't installed (or reopen the terminal after installing). `Port 3000 in use` means another copy is running; close it.
+
+### Words you will see
+
+| Word | Plain meaning |
+|---|---|
+| Terminal | A window where you type commands instead of clicking |
+| Repo / repository | The project folder and its history, hosted on GitHub |
+| Fork / clone | Make your own copy of the repo (online / on your computer) |
+| Environment variable ("env var") | A named setting, like `EXEC_PASSCODE=hunt123`. Kept out of the code so secrets stay secret |
+| Redis | A small online database. Here it only remembers which stages are solved, so a restart doesn't erase the game |
+| Deploy / host | Put the site on a server so anyone can open it with a link |
+| Railway, Vercel | Companies that host sites for you (Railway has a small monthly cost after a trial) |
+| DNS / CNAME | The "address book" for a website name, and the one entry you add so `hunt.yourclub.org` points at your site |
+| JSON | A text file format with `"name": "value"` pairs. Keep the quotes and commas exactly; the AI or `npm run check-content` will tell you if you break one |
+
+---
 
 ## What the hunt is
 
@@ -46,7 +85,6 @@ Ten stages: three indoor puzzles on phones, then the group splits into two outdo
 ## Make it your own hunt
 
 A checklist of everything you should probably change (names, locations, riddles, hints, org branding) is in **[docs/CUSTOMIZING.md](docs/CUSTOMIZING.md)**.
-
 
 You never need to touch code. Everything lives in `content/` and `public/`:
 

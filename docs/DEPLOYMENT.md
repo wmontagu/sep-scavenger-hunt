@@ -17,14 +17,17 @@ Then press **Reset** on `/exec`.
 
 ## Option A: Railway (recommended)
 
+Railway is a company that runs your site for you. It costs a few dollars a month after the free trial; one event usually costs very little (delete the project afterward to stop charges).
+
 Railway keeps one always-on server, which matches how the hunt works (one shared state, polling every few seconds).
 
-1. Fork or push this repo to your own GitHub account.
+1. Click **Fork** on this repo's GitHub page to make your own copy (needs a free GitHub account). Edit your content in that copy first.
 2. [railway.com](https://railway.com) > **New Project** > **Deploy from GitHub repo** > pick it. `railway.json` already sets the build, start and health check.
 3. In the project, **+ New** > **Database** > **Add Redis**.
-4. Click your app service > **Variables** and add:
+4. Click your app service > **Variables** (these are the settings from `.env.example`; each has a name and a value) and add:
    - `EXEC_PASSCODE` = your passcode
    - `REDIS_URL` = `${{Redis.REDIS_URL}}` (Railway fills this in from the Redis service)
+   - After saving, Railway redeploys automatically; wait for a green check.
    - optional: `IMAGE_VERIFIER`, `ANTHROPIC_API_KEY`, `EXEC_WEBHOOK_URL`, `HUNT_ANSWERS_JSON`
 5. **Settings > Networking > Generate Domain**. Open it; you have a live hunt.
 6. Keep **1 replica** (already set in `railway.json`).
