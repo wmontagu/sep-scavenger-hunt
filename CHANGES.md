@@ -293,3 +293,9 @@ Fix:
 - Old `README (1).md` moved to `docs/ORIGINAL-PLAN.md` (stale: mentions Vercel KV and JEV).
 - `next.config.mjs`: `outputFileTracingIncludes` so `content/*.json` ships in serverless (Vercel) builds.
 - `.gitignore`: no longer ignores `.env.example`; also ignores `.vercel/` and `.claude/`.
+
+---
+
+## Iteration 18 - handoff docs (2026-11-23)
+
+- Added `docs/HUNT-OVERVIEW.md` (full stage list, flow diagram, exec role, timing) and `docs/CUSTOMIZING.md` (checklist of names, theme, locations, hints, secrets to change). README links both.

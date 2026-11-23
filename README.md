@@ -20,7 +20,7 @@ and Claude Code or Cursor can do the editing for you.
    (No git? Use the green **Code > Download ZIP** button on GitHub, unzip it, and open that folder.)
 3. Open the `my-hunt` folder in Cursor, or type `claude` in the terminal to start Claude Code, then paste:
 
-   > Read README.md, docs/SETUP.md and docs/DEPLOYMENT.md. Set this project up for me: install dependencies, create .env.local with a passcode I choose, and run it locally so I can see it. Then help me rewrite content/answers.json and content/clues.json for my own event (I'll tell you the stages, answers and locations). When I'm ready, walk me through deploying it to Railway (or Vercel) and putting it on my own domain.
+   > Read README.md, docs/HUNT-OVERVIEW.md, docs/CUSTOMIZING.md, docs/SETUP.md and docs/DEPLOYMENT.md. Set this project up for me: install dependencies, create .env.local with a passcode I choose, and run it locally so I can see it. Then help me rewrite content/answers.json and content/clues.json for my own event (I'll tell you the stages, answers and locations). When I'm ready, walk me through deploying it to Railway (or Vercel) and putting it on my own domain.
 
 That's it. The sections below are the same steps by hand.
 
@@ -39,7 +39,14 @@ npm run dev
 - Exec console: <http://localhost:3000/exec> (not linked anywhere; asks for your passcode)
 - Progress is saved in `.data/hunt.json`. `npm run reset` wipes it.
 
+## What the hunt is
+
+Ten stages: three indoor puzzles on phones, then the group splits into two outdoor threads (one local, one farther away) that each earn half of a secret word, then the halves meet, solve it, and walk to a finale where an exec marks the hunt complete. Full stage-by-stage breakdown, a flow diagram and timing: **[docs/HUNT-OVERVIEW.md](docs/HUNT-OVERVIEW.md)**.
+
 ## Make it your own hunt
+
+A checklist of everything you should probably change (names, locations, riddles, hints, org branding) is in **[docs/CUSTOMIZING.md](docs/CUSTOMIZING.md)**.
+
 
 You never need to touch code. Everything lives in `content/` and `public/`:
 
@@ -55,9 +62,7 @@ You never need to touch code. Everything lives in `content/` and `public/`:
 After editing, run `npm run check-content` (lists anything unfilled) and `npm run dry-run` (plays the whole hunt automatically).
 Details and the stage-by-stage mechanics are in [docs/SETUP.md](docs/SETUP.md) and [docs/ORIGINAL-PLAN.md](docs/ORIGINAL-PLAN.md).
 
-**Heads up:** the answers, names and locations in this repo are from the original CMU SEP event (Pittsburgh landmarks and real
-pledge first names). If you reuse the hunt, replace them, or anyone who clones the repo can read your answers. To keep your real
-answers out of git entirely, paste your answers JSON into the `HUNT_ANSWERS_JSON` environment variable on your host.
+**Heads up:** the answers, names and locations in this repo are from the original CMU SEP event (Pittsburgh landmarks and pledge first names). Replace them for your event; anyone who clones the repo can read the answers. To keep yours out of git, paste your answers JSON into the `HUNT_ANSWERS_JSON` environment variable on your host.
 
 ## Put it on the internet
 
@@ -95,6 +100,8 @@ Short runbook (when to open the outdoor board, what `/exec` does, force-solve, f
 
 ## Docs index
 
+- [docs/HUNT-OVERVIEW.md](docs/HUNT-OVERVIEW.md): what every stage is and how the event flows
+- [docs/CUSTOMIZING.md](docs/CUSTOMIZING.md): what to change for your own group
 - [docs/SETUP.md](docs/SETUP.md): local run, checks, content, runbook
 - [docs/DEPLOYMENT.md](docs/DEPLOYMENT.md): Railway, Vercel, Cloudflare, custom domains
 - [docs/ORIGINAL-PLAN.md](docs/ORIGINAL-PLAN.md): original design plan (some details, like Vercel KV and JEV, were later replaced by Redis and Claude; `CHANGES.md` has the real history)
