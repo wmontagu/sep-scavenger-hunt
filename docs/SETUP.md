@@ -7,6 +7,7 @@ EXEC_PASSCODE=pick-something IMAGE_VERIFIER=manual npm run dev   # http://localh
 ```
 - Pledge board: `/` · Exec console: `/exec` (not linked anywhere; needs the passcode)
 - State is saved to `.data/hunt.json` locally. `npm run reset` wipes it.
+- Settings: `cp .env.example .env.local` and edit `.env.local` (git-ignored), or pass env vars inline as below.
 
 ## Checks
 ```bash

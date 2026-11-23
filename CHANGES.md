@@ -1,6 +1,6 @@
 # Build log — SEP Scavenger Hunt app
 
-Built autonomously from `README (1).md` + `sep-scavenger-hunt-answer-key.md`.
+Built autonomously from `docs/ORIGINAL-PLAN.md` + `sep-scavenger-hunt-answer-key.md`.
 Newest entries at the bottom. **No paid API calls were made at any point**: no
 `ANTHROPIC_API_KEY` / `JEV_*` in the environment, and every dry run forces
 `IMAGE_VERIFIER=manual` or `mock-*`.
@@ -283,3 +283,13 @@ Fix:
 - `/exec` has a new **Photo log** (newest first): verdict, time, AI note, "Show photo" (fetched on demand from the new passcode-only `GET /api/exec/photo?id=`, so the 4s polling stays light) and **Revoke (looks fake)** on approved photos. Revoke un-solves 7b, which re-locks the final stage because convergence needs both threads.
 - The Claude check's system prompt now says to answer no if the image looks AI-generated, edited or composited, a screenshot, or a photo of a screen or printout.
 - New API test covers the log, the on-demand photo fetch, the 404 without passcode, and revoke. 94/94 tests · typecheck clean.
+
+---
+
+## Iteration 17 - open-source handoff (2026-11-23)
+
+- Repo prepared for public reuse. `.env.example` is now a tracked, sanitized template (placeholder passcode); real values go in `.env.local`, which Next.js loads natively. This reverses iteration 13: `next.config.mjs` no longer reads `.env.example`.
+- New `README.md` (clone + paste-a-prompt-into-Claude-Code/Cursor path for non-engineers), `docs/DEPLOYMENT.md` (Railway, Vercel, Cloudflare/custom domain, troubleshooting), `LICENSE` (MIT).
+- Old `README (1).md` moved to `docs/ORIGINAL-PLAN.md` (stale: mentions Vercel KV and JEV).
+- `next.config.mjs`: `outputFileTracingIncludes` so `content/*.json` ships in serverless (Vercel) builds.
+- `.gitignore`: no longer ignores `.env.example`; also ignores `.vercel/` and `.claude/`.
